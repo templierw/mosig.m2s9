@@ -3,13 +3,11 @@ from re import findall
 def parse_text(
     text:str,
     parsing_rule='[a-z]+|[0-9]{4}',
-    anti_dic=[
-            'the', 'a', 'an', 'of', 'by', 'in', 'to', 'and', 'such',
-            'as','for','on', 'th', 'i', 'you', 'he','she', 'it', 'we',
-            'they', 'though', 'with', 'since', 'that', 'these', 'this',
-            'those', 'at'
-        ]
 ):
+
+    with open('stopwords.txt', 'r') as f:
+        anti_dic = [line.rstrip('\n') for line in f.readlines()]
+
     return [
             x for x in findall(
                 parsing_rule, text.lower()
