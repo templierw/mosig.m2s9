@@ -1,0 +1,23 @@
+grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals
+
+generate myDsl "http://www.xtext.org/example/mydsl/MyDsl"
+
+Model:
+	(imports+=Import)*
+	(types+=Type)*
+	(classes+=Class)+
+;
+
+Import: 'import' uri=STRING ';' ;
+
+Type: Simple | Class;
+
+Simple: 'type' name = ID ';' ;
+
+Class: 'Class' name = ID ('extends' ext=[Class])? '{' 
+	(features+=[Feature])*
+'}';
+
+Feature:
+	visibility=('public' | 'protected' | 'private') name = ID ':' type=[Type] (many?='[]')? ';'
+;
