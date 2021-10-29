@@ -1,7 +1,0 @@
-package my.company.common {
-	
-    entity HasAuthor {
-        author: String
-    }
-    
-}
