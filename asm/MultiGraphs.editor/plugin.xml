@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <!-- @generated multiGraphs -->
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="multiGraphs.presentation.MultiGraphsModelWizardID"
+            name="%_UI_MultiGraphsModelWizard_label"
+            class="multiGraphs.presentation.MultiGraphsModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/MultiGraphsModelFile.gif">
+         <description>%_UI_MultiGraphsModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <!-- @generated multiGraphs -->
+      <editor
+            id="multiGraphs.presentation.MultiGraphsEditorID"
+            name="%_UI_MultiGraphsEditor_label"
+            icon="icons/full/obj16/MultiGraphsModelFile.gif"
+            extensions="multigraphs"
+            class="multiGraphs.presentation.MultiGraphsEditor"
+            contributorClass="multiGraphs.presentation.MultiGraphsActionBarContributor">
+      </editor>
+   </extension>
+
+</plugin>
