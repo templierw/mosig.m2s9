@@ -29,7 +29,7 @@ entries = entries.map(lambda x : x.split(','))
 
 # keep the RDD in memory
 entries.cache()
-
+"""
 ##### Create an RDD that contains all nationalities observed in the
 ##### different entries
 
@@ -71,6 +71,13 @@ print(vfrom2)
 vfrom3 = entries.map(lambda x: (x[column_index], 1)).reduceByKey(lambda a,b: a + b).sortBy(lambda x: x[1], ascending=False).take(10)
 for k,v in vfrom3:
 	print(f"{k}: {v}")
+"""
+#4.4.8
+vfrom_idx=findCol(firstLine, "VoyageFrom")
+vto_idx=findCol(firstLine, "VoyageTo")
+
+voy = entries.map(lambda x: [x[vfrom_idx], x[vto_idx]]).distinct()
+
 
 
 
