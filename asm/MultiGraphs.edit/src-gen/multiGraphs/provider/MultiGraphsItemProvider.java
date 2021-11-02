@@ -106,6 +106,7 @@ public class MultiGraphsItemProvider extends ItemProviderAdapter implements IEdi
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(MultiGraphsPackage.Literals.MULTI_GRAPHS__NODES);
+			childrenFeatures.add(MultiGraphsPackage.Literals.MULTI_GRAPHS__EDGE);
 		}
 		return childrenFeatures;
 	}
@@ -173,6 +174,7 @@ public class MultiGraphsItemProvider extends ItemProviderAdapter implements IEdi
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 			return;
 		case MultiGraphsPackage.MULTI_GRAPHS__NODES:
+		case MultiGraphsPackage.MULTI_GRAPHS__EDGE:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 			return;
 		}
@@ -192,6 +194,9 @@ public class MultiGraphsItemProvider extends ItemProviderAdapter implements IEdi
 
 		newChildDescriptors.add(createChildParameter(MultiGraphsPackage.Literals.MULTI_GRAPHS__NODES,
 				MultiGraphsFactory.eINSTANCE.createNode()));
+
+		newChildDescriptors.add(createChildParameter(MultiGraphsPackage.Literals.MULTI_GRAPHS__EDGE,
+				MultiGraphsFactory.eINSTANCE.createEdge()));
 	}
 
 	/**

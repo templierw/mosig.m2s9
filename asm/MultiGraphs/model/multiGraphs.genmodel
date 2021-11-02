@@ -12,6 +12,7 @@
     <genClasses ecoreClass="multiGraphs.ecore#//MultiGraphs">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute multiGraphs.ecore#//MultiGraphs/MGName"/>
       <genFeatures children="true" createChild="true" propertySortChoices="true" ecoreFeature="ecore:EReference multiGraphs.ecore#//MultiGraphs/nodes"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference multiGraphs.ecore#//MultiGraphs/edge"/>
       <genOperations ecoreOperation="multiGraphs.ecore#//MultiGraphs/Valider"/>
       <genOperations ecoreOperation="multiGraphs.ecore#//MultiGraphs/isTree"/>
       <genOperations ecoreOperation="multiGraphs.ecore#//MultiGraphs/Path">

@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link multiGraphs.MultiGraphs#getMGName <em>MG Name</em>}</li>
  *   <li>{@link multiGraphs.MultiGraphs#getNodes <em>Nodes</em>}</li>
+ *   <li>{@link multiGraphs.MultiGraphs#getEdge <em>Edge</em>}</li>
  * </ul>
  *
  * @see multiGraphs.MultiGraphsPackage#getMultiGraphs()
@@ -57,6 +58,18 @@ public interface MultiGraphs extends EObject {
 	 * @generated
 	 */
 	EList<Node> getNodes();
+
+	/**
+	 * Returns the value of the '<em><b>Edge</b></em>' containment reference list.
+	 * The list contents are of type {@link multiGraphs.Edge}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Edge</em>' containment reference list.
+	 * @see multiGraphs.MultiGraphsPackage#getMultiGraphs_Edge()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<Edge> getEdge();
 
 	/**
 	 * <!-- begin-user-doc -->

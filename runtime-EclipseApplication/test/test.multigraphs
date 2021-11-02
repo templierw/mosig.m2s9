@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<multiGraphs:MultiGraphs xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:multiGraphs="http://www.example.org/multiGraphs">
+  <nodes NName="N1" target="//@edge.0" source="//@edge.5"/>
+  <nodes NName="N2" target="//@edge.1 //@edge.2" source="//@edge.0"/>
+  <nodes NName="N3" target="//@edge.3" source="//@edge.2"/>
+  <nodes NName="N4" target="//@edge.4 //@edge.5" source="//@edge.1 //@edge.3"/>
+  <nodes NName="N5" source="//@edge.4"/>
+  <edge Label="e1"/>
+  <edge Label="e2"/>
+  <edge Label="e3"/>
+  <edge Label="e4"/>
+  <edge Label="e5"/>
+  <edge Label="e6"/>
+</multiGraphs:MultiGraphs>

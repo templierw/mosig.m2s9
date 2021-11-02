@@ -140,6 +140,15 @@ public class MultiGraphsPackageImpl extends EPackageImpl implements MultiGraphsP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getMultiGraphs_Edge() {
+		return (EReference) multiGraphsEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EOperation getMultiGraphs__Valider() {
 		return multiGraphsEClass.getEOperations().get(0);
 	}
@@ -248,6 +257,7 @@ public class MultiGraphsPackageImpl extends EPackageImpl implements MultiGraphsP
 		multiGraphsEClass = createEClass(MULTI_GRAPHS);
 		createEAttribute(multiGraphsEClass, MULTI_GRAPHS__MG_NAME);
 		createEReference(multiGraphsEClass, MULTI_GRAPHS__NODES);
+		createEReference(multiGraphsEClass, MULTI_GRAPHS__EDGE);
 		createEOperation(multiGraphsEClass, MULTI_GRAPHS___VALIDER);
 		createEOperation(multiGraphsEClass, MULTI_GRAPHS___IS_TREE);
 		createEOperation(multiGraphsEClass, MULTI_GRAPHS___PATH__STRING_STRING);
@@ -297,6 +307,9 @@ public class MultiGraphsPackageImpl extends EPackageImpl implements MultiGraphsP
 		initEAttribute(getMultiGraphs_MGName(), ecorePackage.getEString(), "MGName", null, 0, 1, MultiGraphs.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMultiGraphs_Nodes(), this.getNode(), null, "nodes", null, 0, -1, MultiGraphs.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
+				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMultiGraphs_Edge(), this.getEdge(), null, "edge", null, 0, -1, MultiGraphs.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
 				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 

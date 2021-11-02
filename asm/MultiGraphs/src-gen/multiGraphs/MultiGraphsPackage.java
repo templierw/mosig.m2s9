@@ -86,13 +86,22 @@ public interface MultiGraphsPackage extends EPackage {
 	int MULTI_GRAPHS__NODES = 1;
 
 	/**
+	 * The feature id for the '<em><b>Edge</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MULTI_GRAPHS__EDGE = 2;
+
+	/**
 	 * The number of structural features of the '<em>Multi Graphs</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MULTI_GRAPHS_FEATURE_COUNT = 2;
+	int MULTI_GRAPHS_FEATURE_COUNT = 3;
 
 	/**
 	 * The operation id for the '<em>Valider</em>' operation.
@@ -255,6 +264,17 @@ public interface MultiGraphsPackage extends EPackage {
 	EReference getMultiGraphs_Nodes();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link multiGraphs.MultiGraphs#getEdge <em>Edge</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Edge</em>'.
+	 * @see multiGraphs.MultiGraphs#getEdge()
+	 * @see #getMultiGraphs()
+	 * @generated
+	 */
+	EReference getMultiGraphs_Edge();
+
+	/**
 	 * Returns the meta object for the '{@link multiGraphs.MultiGraphs#Valider() <em>Valider</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -396,6 +416,14 @@ public interface MultiGraphsPackage extends EPackage {
 		 * @generated
 		 */
 		EReference MULTI_GRAPHS__NODES = eINSTANCE.getMultiGraphs_Nodes();
+
+		/**
+		 * The meta object literal for the '<em><b>Edge</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MULTI_GRAPHS__EDGE = eINSTANCE.getMultiGraphs_Edge();
 
 		/**
 		 * The meta object literal for the '<em><b>Valider</b></em>' operation.
