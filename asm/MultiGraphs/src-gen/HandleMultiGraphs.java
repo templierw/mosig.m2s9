@@ -27,7 +27,8 @@ public class HandleMultiGraphs {
 		// Get the resource
 		Resource res = resSet.getResource(
 				URI.createURI(
-						"/home/william/mosig.m2s9/repo/runtime-EclipseApplication/test/test.multigraphs"
+						// TODO: change path
+						"/PATH/TO/FILE/test.multigraphs"
 						), true
 				);
 		// Get the first model element and cast it to the right type

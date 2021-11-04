@@ -76,7 +76,20 @@ for k,v in vfrom3:
 vfrom_idx=findCol(firstLine, "VoyageFrom")
 vto_idx=findCol(firstLine, "VoyageTo")
 
-voy = entries.map(lambda x: [x[vfrom_idx], x[vto_idx]]).distinct()
+def road_tuple(vfrom, vto):
+	return (
+		(vfrom, vto) if vfrom < vto else (vto, vfrom)
+	)
+
+voy = entries.map(lambda line: (
+				(road_tuple(line[vfrom_idx].replace('"',''),line[vto_idx].replace('"','')))
+				, 1))\
+			 .reduceByKey(lambda v1,v2: v1+v2)\
+			 .sortBy(lambda x: x[1], False)\
+			 .take(10)
+for k,v in voy:
+	print(f"{k}: {v}")
+
 
 
 

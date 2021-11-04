@@ -150,23 +150,24 @@ public class MultiGraphsImpl extends MinimalEObjectImpl.Container implements Mul
 	 * @generated NOT
 	 */
 	public boolean Valider() {
-		LinkedList<String> nname = new LinkedList<>();
+		EList<String> used = new BasicEList<>();
+		String name;
 		for(Node n : this.getNodes()) {
-			String name = n.getNName();
-			if (nname.contains(name)) {
+			name = n.getNName();
+			if (used.contains(name)) {
 				System.out.println("Node name: " + name + " is defined several times.");
 				return false;
 			
-			} else nname.add(name);
+			} else used.add(name);
 		}
-		LinkedList<String> labels = new LinkedList<>();
+		used.clear();
 		for(Edge e : this.getEdge()) {
-			String label = e.getLabel();
-			if (labels.contains(label)) {
-				System.out.println("Edge label: " + label + " is defined several times.");
+			name = e.getLabel();
+			if (used.contains(name)) {
+				System.out.println("Edge label: " + name + " is defined several times.");
 				return false;
 			
-			} else labels.add(label);
+			} else used.add(name);
 		}
 		return true;
 	}
@@ -191,7 +192,7 @@ public class MultiGraphsImpl extends MinimalEObjectImpl.Container implements Mul
 		Node n1 = null, n2 = null;
 		for(Node n : this.getNodes()) {
 			if(n.getNName().equals(node1)) n1 = n;
-			else if (n.getNName().equals(node2)) n2 = n;
+			if (n.getNName().equals(node2)) n2 = n;
 		}
 		if(n1.equals(null) || n2.equals(null)) return;
 		EList<Node> r = this.getReachableNodes(n1);
@@ -227,14 +228,12 @@ public class MultiGraphsImpl extends MinimalEObjectImpl.Container implements Mul
 	}
 	
 	private String printEdgeLabel(Node n1, Node n2) {
-		String path = null;
-		
 		for(Edge e : n1.getTarget()) {
 			if(n2.getSource().contains(e))
-				path = e.getLabel();
+				return e.getLabel();
 		}
 		
-		return path;
+		return null;
 	}
 
 	/**
