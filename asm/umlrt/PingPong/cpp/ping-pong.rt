@@ -1,0 +1,55 @@
+model PingPong {
+
+    protocol PingPong {
+        out message ping()
+         in message pong()
+    }
+
+    capsule Pinger {
+        port p1: PingPong
+        port log: RTSLibrary.Log
+
+        statemachine {
+            initial Init
+            state Playing {
+                entry  `p1.ping().send();`
+            }
+            transition {
+                from Init to Playing
+            }
+            transition {
+                from Playing to Playing
+                triggers from p1 on pong
+                action `log.log("pong was received");`
+            }
+        }
+    }
+
+    capsule Ponger {
+        port p2: ~PingPong
+        port log: RTSLibrary.Log
+
+        statemachine {
+            initial Init
+            state Playing {
+            }
+            transition {
+                from Init to Playing
+            }
+            transition {
+                from Playing to Playing
+                triggers from p2 on ping
+                action `
+                    log.log("ping was received");
+                    p2.pong().send();
+                `
+            }
+        }
+    }
+
+    top capsule Game {
+        part pinger : Pinger
+        part ponger : Ponger
+        connect pinger.p1 to ponger.p2
+    }
+}

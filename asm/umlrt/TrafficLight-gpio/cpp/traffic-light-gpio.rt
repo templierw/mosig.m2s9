@@ -1,0 +1,105 @@
+model TrafficLightWithReplication {
+
+    import "gpio-raspberry.rt"
+
+    protocol AssignementProtocol {
+        in message assignGpios(gpio1: int, gpio2: int, gpio3: int)
+    }
+
+    capsule Controller {
+        port log: RTSLibrary.Log
+        port timer: RTSLibrary.Timing
+        port p: ~GpioPackage.GpioProt [3]
+        port assignPort: AssignementProtocol
+
+        statemachine {
+            initial Init
+
+            state Unassigned {
+                entry `log.log("Leds unassigned");`
+            }
+
+            state Red {
+                entry `
+                    log.log("Entering Red state");
+                    p.setHigh().sendAt(0); // red
+                    p.setLow().sendAt(2); // amber
+                `
+            }
+
+            state Green {
+                entry `
+                    log.log("Entering Green state");
+                    p.setLow().sendAt(0); // red
+                    p.setHigh().sendAt(1); // green
+                `
+            }
+
+            state Amber {
+                entry `
+                    log.log("Entering Amber state");
+                    p.setLow().sendAt(1); // green
+                    p.setHigh().sendAt(2); // amber
+                `
+            }
+
+            transition {
+                from Init to Unassigned
+            }
+
+            transition {
+                from Unassigned to Red
+                triggers from assignPort on assignGpios
+                action `
+                    p.assign(gpio1, 0).sendAt(0);
+                    p.assign(gpio2, 0).sendAt(1);
+                    p.assign(gpio3, 0).sendAt(2);
+                    timer.informEvery(UMLRTTimespec(5,0));
+                `
+            }
+
+            transition {
+                from Red to Green
+                triggers from timer on timeout
+            }
+
+            transition {
+                from Green to Amber
+                triggers from timer on timeout
+            }
+
+            transition {
+                from Amber to Red
+                triggers from timer on timeout
+            }
+        } 
+    }
+
+    capsule TrafficLight {
+        part gpios : GpioPackage.Gpio [3]
+        part controller : Controller
+        relay port assignPort : ~AssignementProtocol
+        connect controller.p to gpios.p
+        connect controller.assignPort to assignPort
+    }
+
+    top capsule TestCapsule {
+        internal port assignPort : ~AssignementProtocol
+
+        part trafficLight: TrafficLight
+
+        connect assignPort to trafficLight.assignPort
+
+        statemachine {
+            initial Init
+
+            state Start {
+                entry `
+                    assignPort.assignGpios(23, 25, 24).send();
+                `
+            }
+
+            transition { from Init to Start } 
+        }
+    }
+}

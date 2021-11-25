@@ -1,0 +1,67 @@
+model GpioPackage {
+
+    protocol GpioProt {
+         in message setHigh()
+         in message setLow()
+         in message assign(gpio1 : int, mode : int) // gpio : gpio numer, // mode : 0 (output) 1 (input)
+        out message onStatusChanged(val : int)
+    }
+
+    capsule Gpio {
+
+        port p : GpioProt
+        port log : RTSLibrary.Log
+
+        attribute isInputMode : int
+        attribute gpio : int
+        
+        statemachine {
+            initial Init
+
+            state Unassigned {
+            }
+
+            composite state Assigned {
+                initial Init
+
+                state Ground {
+                    entry `
+                        log.log("GPIO %d is low", this->gpio);
+                    `
+                }
+
+                state Vcc {
+                    entry `
+                        log.log("GPIO %d is high", this->gpio);
+                    `
+                }
+
+                transition { from Init to Ground }
+
+                transition {
+                    from Ground to Vcc
+                    triggers from p on setHigh
+                    guard `return isInputMode == 0;`
+                }
+
+                transition {
+                    from Vcc to Ground
+                    triggers from p on setLow
+                    guard `return isInputMode == 0;`
+                }
+            }
+
+            transition { from Init to Unassigned }
+
+            transition {
+                from Unassigned to Assigned
+                triggers from p on assign
+                action `
+                    this->gpio = gpio1;
+                    this->isInputMode = (mode == 0) ? 0 : 1;
+                    log.log("GPIO %d is %s", this->gpio, (this->isInputMode) ? "input" : "output");
+                `
+            }
+        }
+    }
+}

@@ -1,0 +1,35 @@
+model LedPackage {
+    protocol TLProt {
+        in message turnOn()
+        in message turnOff()
+    }
+
+    capsule Led {
+        port p: TLProt
+        port log: RTSLibrary.Log
+
+        statemachine {
+            initial Init
+
+            state On {
+                entry `this.log.log("led %d is on", this.getIndex());`
+            }
+
+            state Off {
+                entry `this.log.log("led %d is off", this.getIndex());`
+            }
+
+            transition { from Init to Off }
+            
+            transition {
+                from Off to On
+                triggers from p on turnOn
+            }
+
+            transition {
+                from On to Off
+                triggers from p on turnOff
+            }
+        }
+    }
+}

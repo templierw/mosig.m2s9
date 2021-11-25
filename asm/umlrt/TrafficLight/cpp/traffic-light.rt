@@ -1,0 +1,51 @@
+model TrafficLight{
+
+    top capsule TrafficLight {
+        port log: RTSLibrary.Log
+        port timer: RTSLibrary.Timing
+
+        statemachine {
+            initial Init
+
+            state Red {
+                entry `
+                    log.log("Entering Red state");
+                    timer.informIn(UMLRTTimespec(5, 0));
+                    `
+            }
+
+            state Green {
+                entry `
+                    log.log("Entering Green state");
+                    timer.informIn(UMLRTTimespec(5, 0));
+                    `
+            }
+
+            state Amber {
+                entry `
+                    log.log("Entering Amber state");
+                    timer.informIn(UMLRTTimespec(2, 0));
+                    `
+            }
+
+            transition {
+                from Init to Red
+            }
+
+            transition {
+                from Red to Green
+                triggers from timer on timeout
+            }
+
+            transition {
+                from Green to Amber
+                triggers from timer on timeout
+            }
+
+            transition {
+                from Amber to Red
+                triggers from timer on timeout
+            }
+        } 
+    }
+}

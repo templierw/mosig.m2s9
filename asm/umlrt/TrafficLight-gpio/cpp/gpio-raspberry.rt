@@ -1,0 +1,73 @@
+model GpioPackage {
+
+    protocol GpioProt {
+         in message setHigh()
+         in message setLow()
+         in message assign(gpio1 : int, mode : int) // gpio : gpio numer, // mode : 0 (output) 1 (input)
+        out message onStatusChanged(val : int)
+    }
+
+    capsule Gpio {
+
+        implementation preface `#include <wiringPi.h>` // Include a specific library
+
+        port p : GpioProt
+        port log : RTSLibrary.Log
+
+        attribute isInputMode : int
+        attribute gpio : int
+        
+        statemachine {
+            initial Init
+
+            state Unassigned {
+                entry `wiringPiSetup();` // We initialize the lib
+            }
+
+            composite state Assigned {
+                initial Init
+
+                state Ground {
+                    entry `
+                        log.log("GPIO %d is low", this->gpio);
+                        digitalWrite(this->gpio, LOW);
+                    `
+                }
+
+                state Vcc {
+                    entry `
+                        log.log("GPIO %d is high", this->gpio);
+                        digitalWrite(this->gpio, HIGH);
+                    `
+                }
+
+                transition { from Init to Ground }
+
+                transition {
+                    from Ground to Vcc
+                    triggers from p on setHigh
+                    guard `return isInputMode == 0;`
+                }
+
+                transition {
+                    from Vcc to Ground
+                    triggers from p on setLow
+                    guard `return isInputMode == 0;`
+                }
+            }
+
+            transition { from Init to Unassigned }
+
+            transition {
+                from Unassigned to Assigned
+                triggers from p on assign
+                action `
+                    this->gpio = gpio1;
+                    this->isInputMode = (mode == 0) ? 0 : 1;
+                    pinMode(this->gpio, (mode == 0) ? OUTPUT : INPUT); // We set the GPIO
+                    log.log("GPIO %d is %s", this->gpio, (this->isInputMode) ? "input" : "output");
+                `
+            }
+        }
+    }
+}
