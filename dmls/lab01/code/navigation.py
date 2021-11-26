@@ -1,5 +1,3 @@
-import sys
-from typing import Counter
 from pyspark import SparkContext
 import time
 
@@ -7,7 +5,6 @@ import time
 # returns -1 if it cannot find it
 def findCol(firstLine, name):
 	return firstLine.index(name) if name in firstLine else -1
-
 
 #### Driver program
 
@@ -89,6 +86,18 @@ voy = entries.map(lambda line: (
 			 .take(10)
 for k,v in voy:
 	print(f"{k}: {v}")
+
+#4.4.9
+month_idx = findCol(firstLine, "Month")
+temperature_idx = findCol(firstLine, "ProbTair")
+
+hottest = entries.map(
+	lambda line: (line[month_idx].replace('"',''), line[temperature_idx].replace('"',''), 1)
+	).take(10)
+
+for k in hottest:
+	print(k)
+
 
 
 

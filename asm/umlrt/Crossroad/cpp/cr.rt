@@ -1,0 +1,115 @@
+model Crossroad {
+
+    import "led.rt"
+
+    capsule Controller1 {
+        port log: RTSLibrary.Log
+        port timer: RTSLibrary.Timing
+        port p : ~LedPackage.TLProt [3]
+
+        statemachine {
+            initial Init
+
+            state Red {
+                entry `
+                    log.log("VT: Entering Red state");
+                    timer.informIn(UMLRTTimespec(14, 0));
+                    `
+            }
+
+            state Green {
+                entry `
+                    log.log("VT: Entering Green state");
+                    timer.informIn(UMLRTTimespec(11, 0));
+                    `
+            }
+
+            state Amber {
+                entry `
+                    log.log("VT: Entering Amber state");
+                    timer.informIn(UMLRTTimespec(3, 0));
+                    `
+            }
+
+            transition {
+                from Init to Red
+                action `p.turnOn().send();`
+            }
+
+            transition {
+                from Red to Green
+                triggers from timer on timeout
+            }
+
+            transition {
+                from Green to Amber
+                triggers from timer on timeout
+            }
+
+            transition {
+                from Amber to Red
+                triggers from timer on timeout
+            }
+        } 
+    }
+
+    capsule Controller2 {
+        port log: RTSLibrary.Log
+        port timer: RTSLibrary.Timing
+        port p : ~LedPackage.TLProt [3]
+
+        statemachine {
+            initial Init
+
+            state Red {
+                entry `
+                    log.log("\tHT: Entering Red state");
+                    timer.informIn(UMLRTTimespec(14, 0));
+                    `
+            }
+
+            state Green {
+                entry `
+                    log.log("\tHT: Entering Green state");
+                    timer.informIn(UMLRTTimespec(11, 0));
+                    `
+            }
+
+            state Amber {
+                entry `
+                    log.log("\tHT: Entering Amber state");
+                    timer.informIn(UMLRTTimespec(3, 0));
+                    `
+            }
+
+            transition {
+                from Init to Green
+                action `p.turnOn().send();`
+            }
+
+            transition {
+                from Red to Green
+                triggers from timer on timeout
+            }
+
+            transition {
+                from Green to Amber
+                triggers from timer on timeout
+            }
+
+            transition {
+                from Amber to Red
+                triggers from timer on timeout
+            }
+        } 
+    }
+
+    top capsule CrossRoad {
+        part leds1 : LedPackage.Led [3]
+        part controller1 : Controller1
+        connect controller1.p to leds1.p
+        part leds2 : LedPackage.Led [3]
+        part controller2 : Controller2
+        connect controller2.p to leds2.p
+    }
+}
