@@ -2,7 +2,7 @@ model Crossroad {
 
     import "led.rt"
 
-    capsule Controller1 {
+    capsule TrLight1 {
         port log: RTSLibrary.Log
         port timer: RTSLibrary.Timing
         port p : ~LedPackage.TLProt [3]
@@ -53,7 +53,7 @@ model Crossroad {
         } 
     }
 
-    capsule Controller2 {
+    capsule TrLight2 {
         port log: RTSLibrary.Log
         port timer: RTSLibrary.Timing
         port p : ~LedPackage.TLProt [3]
@@ -106,10 +106,10 @@ model Crossroad {
 
     top capsule CrossRoad {
         part leds1 : LedPackage.Led [3]
-        part controller1 : Controller1
-        connect controller1.p to leds1.p
+        part tl1 : TrLight1
+        connect tl1.p to leds1.p
         part leds2 : LedPackage.Led [3]
-        part controller2 : Controller2
-        connect controller2.p to leds2.p
+        part tl2 : TrLight2
+        connect tl2.p to leds2.p
     }
 }

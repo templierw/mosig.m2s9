@@ -1,8 +1,0 @@
-CrossRoad.YSHDMBfZ
-    CrossRoad.controller1#p.far[0] <-> CrossRoad.leds1[0]#p.far[0]
-    CrossRoad.controller1#p.far[1] <-> CrossRoad.leds1[1]#p.far[0]
-    CrossRoad.controller1#p.far[2] <-> CrossRoad.leds1[2]#p.far[0]
-CrossRoad.rKsViHYp
-    CrossRoad.controller2#p.far[0] <-> CrossRoad.leds2[0]#p.far[0]
-    CrossRoad.controller2#p.far[1] <-> CrossRoad.leds2[1]#p.far[0]
-    CrossRoad.controller2#p.far[2] <-> CrossRoad.leds2[2]#p.far[0]
