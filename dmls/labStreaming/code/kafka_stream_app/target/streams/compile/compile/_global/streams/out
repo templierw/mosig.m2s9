@@ -1,0 +1,4 @@
+[0m[[0m[31merror[0m] [0m[0m/user/5/.base/templiew/home/repo/dmls/labStreaming/code/kafka_stream_app/src/main/scala/DirectKafkaWordCount.scala:78:36: value reduceByKeyAndWindow is not a member of org.apache.spark.streaming.dstream.DStream[String][0m
+[0m[[0m[31merror[0m] [0m[0m    val windowedWordCounts = words.reduceByKeyAndWindow([0m
+[0m[[0m[31merror[0m] [0m[0m                                   ^[0m
+[0m[[0m[31merror[0m] [0m[0mone error found[0m

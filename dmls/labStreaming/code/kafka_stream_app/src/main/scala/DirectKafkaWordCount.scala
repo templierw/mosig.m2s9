@@ -70,10 +70,16 @@ object DirectKafkaWordCount {
       ConsumerStrategies.Subscribe[String, String](topicsSet, kafkaParams))
 
     // Get the lines, split them into words, count the words and print
+    messages.map
     val lines = messages.map(_.value)
     val words = lines.flatMap(_.split(" "))
-    val wordCounts = words.map(x => (x, 1L)).reduceByKey(_ + _)
-    wordCounts.print()
+    //val wordCounts = words.map(x => (x, 1L)).reduceByKey(_ + _)
+    //wordCounts.print()
+
+    val windowedWordCounts = words.reduceByKeyAndWindow(
+      (a:Int,b:Int) => (a + b), Seconds(30), Seconds(10)
+    )
+    windowedWordCounts.print()
 
     // Start the computation
     ssc.start()
