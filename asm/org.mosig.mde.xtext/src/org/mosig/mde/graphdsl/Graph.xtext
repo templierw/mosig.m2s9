@@ -1,0 +1,10 @@
+grammar org.mosig.mde.graphdsl.Graph with org.eclipse.xtext.common.Terminals
+
+generate graph "http://www.mosig.org/mde/graphdsl/Graph"
+
+Graph:
+	('Nodes' (theNodes+=Node)+)?;
+	
+Node:
+	name=ID ('[' (next+=[Node])+ ']')?;
+

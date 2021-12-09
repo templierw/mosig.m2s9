@@ -1,0 +1,2 @@
+module org.mosig.myfamily {
+}

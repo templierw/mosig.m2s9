@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin>
+	<extension point="org.eclipse.emf.ecore.generated_package">
+		<package
+			uri = "http://www.mosig.org/lab4/myfamily/Family"
+			class = "org.mosig.lab4.myfamily.family.FamilyPackage"
+			genModel = "model/generated/Family.genmodel" />
+	</extension>
+</plugin>
