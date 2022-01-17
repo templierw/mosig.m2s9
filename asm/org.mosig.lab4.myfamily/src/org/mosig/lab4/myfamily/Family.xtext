@@ -1,0 +1,16 @@
+grammar org.mosig.lab4.myfamily.Family with org.eclipse.xtext.common.Terminals
+
+generate family "http://www.mosig.org/lab4/myfamily/Family"
+
+Model:
+	families+=Family*;
+	
+Family:
+	'Family' surname=ID '{'
+		('Father' f=[Member])?
+		('Mother' m=[Member])?
+		('Sons' s+=Member+)?
+		('Daughters' d+=Member+)?
+	'}';
+
+Member: name=ID;
