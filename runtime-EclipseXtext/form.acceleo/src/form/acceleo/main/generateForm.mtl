@@ -1,0 +1,32 @@
+[comment encoding = UTF-8 /]
+[module generateForm('http://www.asmae.mosig/acceleo/Form')]
+
+
+[template public generateFormFromModel(aModel : Model)]
+[comment @main/]
+[file ('lala.java', False, 'UTF-8')]
+
+<html>
+<body>
+
+<h1>[aModel.name/]</h1>
+
+[for (q: Question : aModel.lesQuestions)]
+[transQuestion()]
+[/for]
+
+</html>
+</body>
+[/template]
+
+[template public transQuestion(q: Question)?(q.kindOf='input')]
+<h3> [q.label] <input type='text' name='[q.]'
+[/template]
+
+[template public transQuestion(q: Question)?(q.kindOf='choice')]
+
+[/template]
+
+[template public transQuestion(q: Question)?(q.kindOf='option')]
+
+[/template]
