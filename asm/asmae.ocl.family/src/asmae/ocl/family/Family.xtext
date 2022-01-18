@@ -1,0 +1,17 @@
+grammar asmae.ocl.family.Family with org.eclipse.xtext.common.Terminals
+
+generate family "http://www.ocl.asmae/family/Family"
+
+FamilyModel:
+	(families+=Family)* ;
+	
+Family:
+	'Family' lastName=ID '{'
+	('Father' father=[Member])?
+	('Mother' mother=[Member])?
+	('Sons' (sons+=Member)+)?
+	('Daughters' (daughters+=Member)+)?
+	'}'
+	;
+	
+Member: name=ID ;

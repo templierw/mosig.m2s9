@@ -1,0 +1,31 @@
+Family Addams{
+	Father Adam
+	Mother Eve
+	Sons Paul Bob
+	Daughters Trinite
+}
+
+Family Addams{
+	Father Bob
+	Mother Stephanie
+	Sons Edouard Oscar
+	Daughters Tiffany
+}
+
+Family Addams{
+	Father Oscar
+	Mother Claudine
+	Sons Pierre Thomas
+	Daughters Tiphaine
+}
+
+Family Bazex{
+	Father Simon
+	Mother Tiffany
+	Sons Fred Pierre
+}
+
+Family PersonsWithoutKnownParents{
+	Sons Adam Simon
+	Daughters Eve Claudine Stephanie
+} 

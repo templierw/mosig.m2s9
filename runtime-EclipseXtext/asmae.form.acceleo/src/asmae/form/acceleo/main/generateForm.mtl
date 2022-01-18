@@ -1,0 +1,43 @@
+[comment encoding = UTF-8 /]
+[module generateForm('http://www.form.asmae/Form')]
+
+
+[template public generateFormFromModel(aModel : Model)]
+[comment @main/]
+[file ('form.html', false, 'UTF-8')]
+
+<html>
+<body>
+
+<h1>[aModel.name/]</h1>
+
+[for (q: Question | aModel.lesQuestions)]
+[transQuestion()/]
+[/for]
+
+</html>
+</body>
+
+[/file]
+[/template]
+
+[template public transQuestion(q: Question)?(q.kindOf.oclIsTypeOf(input))]
+<h3> [q.label/] <input type="text" name="[q.kindOf.name/]"/> </h3>
+[/template]
+
+[template public transQuestion(q: Question)?(q.kindOf.oclIsTypeOf(choice))]
+<h3> [q.label/] </h3>
+[for (c: check | q.kindOf.oclAsType(choice).lesChoix)]
+	<input type="checkbox" name="[q.kindOf.name/]" value="[c.label/]"> [c.name/] </br>
+[/for]
+</br>
+[/template]
+
+[template public transQuestion(q: Question)?(q.kindOf.oclIsTypeOf(option))]
+<h3> [q.label/] </h3>
+[for (r: radio  | q.kindOf.oclAsType(option).lesOptions)]
+	<input type="radio" name="[q.kindOf.name/]" value="[r.label/]"> [r.name/] </br>
+[/for]
+</br>
+[/template]
+

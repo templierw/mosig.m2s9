@@ -1,0 +1,22 @@
+Family Addams{
+	Father Adam
+	Mother Stephanie
+	Sons Edouard Oscar
+	Daughters Tiffany
+}
+
+Family Addams{
+	Father Adam
+	Mother Claudine
+	Sons Pierre Thomas
+	Daughters Tiffany
+}
+
+Family Jo {
+	
+}
+
+Family PersonsWithoutKnownParents{
+	Sons Adam Simon
+	Daughters Eve Claudine Stephanie
+}

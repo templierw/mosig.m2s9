@@ -1,0 +1,20 @@
+import 'http://www.ocl.asmae/family/Family'
+
+package family
+
+context FamilyModel
+	inv FamilyNotNull('Q1. At least one family declared') :
+ 		self.families->notEmpty()
+ 	
+context Family
+	inv HasMembers('Q2. Family must have members') :
+		self.father->notEmpty() or self.mother->notEmpty() or self.sons->notEmpty() or self.daughters->notEmpty()
+		
+context Family
+	inv UniqueNames('Q3. Each family is unique by its name and the names of its members') :
+		Family.allInstances()->forAll(
+			f: Family | self.lastName = f.lastName implies self.father.name <> f.father.name and self.mother.name <> f.mother.name and
+			self.sons.name->excludesAll(f.sons.name) and self.daughters.name->excludesAll(f.daughters.name)
+		)
+
+endpackage
