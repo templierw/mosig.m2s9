@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<graph:Graph xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:graph="http://www.example.org/graph">
-  <theNodes name="n1" next="//@theNodes.1"/>
-  <theNodes name="n2" previous="//@theNodes.0"/>
-</graph:Graph>
